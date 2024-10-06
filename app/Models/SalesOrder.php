@@ -9,20 +9,20 @@ class SalesOrder extends Model
 {
     use HasFactory;
 
-    protected $table = 'SalesOrders';
+    protected $table = 'sales_orders';
 
     protected $fillable = [
         'no_order',
         'nama',
         'alamat',
-        'product_id',
+        'products_id',
         'vendor',
         'qty',
         'total_harga',
     ];
 
-    public function Product()
+    public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class,'products_id');
     }
 }

@@ -21,9 +21,20 @@
                       <!-- <li><a href="index3.html">Dashboard3</a></li> -->
                   </ul>
               </li>
-             
+
+            <li><a href="{{route('admin.purchase')}}">
+                <i class="fa fa-laptop"></i> Purchase Order</a>
+            </li>
+
+            <li><a href="{{route('admin.sales')}}">
+                <i class="fa fa-laptop"></i> Sales Order</a>
+            </li>
+
+
+
               <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span
-                          class="label label-success pull-right">Coming Soon</span></a></li>
+                          class="label label-success pull-right">Coming Soon</span></a>
+            </li>
           </ul>
       </div>
 

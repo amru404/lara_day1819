@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PurchaseorderController;
+use App\Http\Controllers\salesorderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,12 +71,31 @@ Route::middleware(['auth', 'user-permission:admin'])->group(function () {
     Route::get('/admin/product/destroy/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
 
      // admin user
-     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user');
-     Route::get('/admin/user/add', [UserController::class, 'create'])->name('admin.user.add');
-     Route::POST('/admin/user/store', [UserController::class, 'store'])->name('admin.user.store');
-     Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
-     Route::PUT('/admin/user/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
-     Route::get('/admin/user/destroy/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+    Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user');
+    Route::get('/admin/user/add', [UserController::class, 'create'])->name('admin.user.add');
+    Route::POST('/admin/user/store', [UserController::class, 'store'])->name('admin.user.store');
+    Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+    Route::PUT('/admin/user/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
+    Route::get('/admin/user/destroy/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+
+    //  admin purchase order
+    Route::get('/admin/purchase', [PurchaseorderController::class, 'indexAdmin'])->name('admin.purchase');
+    Route::get('/admin/purchase/add', [PurchaseorderController::class, 'create'])->name('admin.purchase.add');
+    Route::POST('/admin/purchase/store', [PurchaseorderController::class, 'store'])->name('admin.purchase.store');
+    Route::get('/admin/purchase/show/{id}', [PurchaseorderController::class, 'show'])->name('admin.purchase.show');
+    Route::get('/admin/purchase/edit/{id}', [PurchaseorderController::class, 'edit'])->name('admin.purchase.edit');
+    Route::PUT('/admin/purchase/update/{id}', [PurchaseorderController::class, 'update'])->name('admin.purchase.update');
+    Route::get('/admin/purchase/destroy/{id}', [PurchaseorderController::class, 'destroy'])->name('admin.purchase.destroy');
+
+    //  admin sales order
+    Route::get('/admin/sales', [SalesorderController::class, 'index'])->name('admin.sales');
+    Route::get('/admin/sales/add', [SalesorderController::class, 'create'])->name('admin.sales.add');
+    Route::POST('/admin/sales/store', [SalesorderController::class, 'store'])->name('admin.sales.store');
+    Route::get('/admin/sales/show/{id}', [SalesorderController::class, 'show'])->name('admin.sales.show');
+    Route::get('/admin/sales/edit/{id}', [SalesorderController::class, 'edit'])->name('admin.sales.edit');
+    Route::PUT('/admin/sales/update/{id}', [SalesorderController::class, 'update'])->name('admin.sales.update');
+    Route::get('/admin/sales/destroy/{id}', [SalesorderController::class, 'destroy'])->name('admin.sales.destroy');
+
 
 
 

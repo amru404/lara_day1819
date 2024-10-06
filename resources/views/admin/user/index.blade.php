@@ -9,7 +9,7 @@
 <a href="{{route('admin.user.add')}}" class="btn btn-primary">Add User</a>
 
 <div class="table-responsive">
-  <table class="table table-striped jambo_table bulk_action">
+  <table class="table table-striped jambo_table bulk_action" id="datatable">
     <thead>
       <tr class="headings">
       <th class="column-title">No </th>
@@ -17,9 +17,6 @@
         <th class="column-title">Email</th>
         <th class="column-title">Role</th>
         <th class="column-title no-link last"><span class="nobr">Action</span>
-        </th>
-        <th class="bulk-actions" colspan="7">
-          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
         </th>
       </tr>
     </thead>
@@ -32,7 +29,7 @@
       <tr class="even pointer">
         <td>{{ $number }}</td>
         <?php $number++; ?>
-        <td class=" ">{{ $u->nama }}</td>
+        <td class=" ">{{ $u->name }}</td>
         <td class=" ">{{ $u->email }}</td>
         <td class=" ">{{ $u->role }}</td>
         <td class=" ">

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('no_order')->default('SO' . Str::random(4));
+            $table->string('no_order')->default('PO' . Str::random(4));
             $table->string('nama');
             $table->longtext('alamat');
             $table->unsignedBigInteger('products_id');
