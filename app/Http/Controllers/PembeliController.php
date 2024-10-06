@@ -3,43 +3,49 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SalesOrder;
+use App\Models\PurchaseOrder;
 use App\Models\Product;
 use Illuminate\Support\Str;
-    
+use Illuminate\Support\Facades\Auth;
 
-class SalesorderController extends Controller
+class PembeliController extends Controller
 {
-   
-    
 
-
-    public function index()
-    {
-        $orders = SalesOrder::all();
-
-        return view('admin.sales.index',compact('orders'));
+    function dashboard(){
+        $order = PurchaseOrder::where('nama', Auth::user()->name)->get();
+        $order = count($order);
+        dd($order);
     }
 
-    
-    
+
+    function product(){
+        $products = Product::all();
+
+        return view('pembeli/product/index', compact('products'));
+
+    }
+   
+    function index(){
+        $orders = PurchaseOrder::where('nama', Auth::user()->name)->get();
+
+        return view('pembeli.purchase.index',compact('orders'));
+    }
+
 
     public function create()
     {
         $product = Product::all();
-        return view ('admin.sales.add',compact('product'));
+        return view ('pembeli.purchase.add',compact('product'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
+        
         $request->validate([
             'products_id' => 'required|exists:products,id',
             'nama'        => 'required|string',
             'alamat'      => 'required|string',
-            'vendor'      => 'required|string',
             'qty'         => 'required|integer|min:1',
         ]);
         
@@ -61,39 +67,36 @@ class SalesorderController extends Controller
             'stock'    => $stockKurang,
         ]);
         
-        SalesOrder::create([
+        PurchaseOrder::create([
             'no_order'     => 'PO' . Str::random(4),
             'nama'         => $request->nama,
             'alamat'       => $request->alamat,
             'products_id'  => $product_id,
-            'vendor'          => $request->vendor,
             'qty'          => $request->qty,
             'total_harga'  => $total_harga,
         ]);
 
-        return redirect()->route('admin.sales')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('pembeli.purchase')->with(['success' => 'Data Berhasil Disimpan!']);
     }
-
     
+
 
     public function show(string $id)
     {
-        $order = SalesOrder::findOrFail($id);
+         $order = PurchaseOrder::findOrFail($id);
 
-        return view('admin.sales.detail', compact('order'));
+         return view('pembeli.purchase.detail', compact('order'));
+ 
     }
-
     
 
     public function edit(string $id)
     {
-        $order = SalesOrder::findOrFail($id);
+        $order = PurchaseOrder::findOrFail($id);
         $product = Product::all();
 
-        return view('admin.sales.edit', compact('order','product'));
+        return view('pembeli.purchase.edit', compact('order','product'));
     }
-
-    
 
     public function update(Request $request, string $id)
     {
@@ -101,14 +104,13 @@ class SalesorderController extends Controller
             'products_id' => 'required|exists:products,id',
             'nama'        => 'required|string',
             'alamat'      => 'required|string',
-            'vendor'      => 'required|string',
             'qty'         => 'required|integer|min:1',
         ]);
         
         $product_id = $request->products_id;
 
         $product = Product::findOrFail($product_id);
-        $order = SalesOrder::findOrFail($id);
+        $order = PurchaseOrder::findOrFail($id);
         
         $harga_brg = $product->harga;
         $total_harga = $harga_brg * $request->qty;
@@ -130,21 +132,19 @@ class SalesorderController extends Controller
             'no_order'     => 'PO' . Str::random(4),
             'nama'         => $request->nama,
             'alamat'       => $request->alamat,
-            'vendor'       => $request->vendor,
             'products_id'  => $product_id,
             'qty'          => $request->qty,
             'total_harga'  => $total_harga,
         ]);
 
-        return redirect()->route('admin.sales')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('pembeli.purchase')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
+
     public function destroy(string $id)
     {
-        $order = SalesOrder::findOrFail($id);   
+        $order = PurchaseOrder::findOrFail($id);   
         $product_id = $order->products_id;
         $product = Product::findOrFail($product_id);
         $stock = $product->stock;
@@ -157,6 +157,7 @@ class SalesorderController extends Controller
         
         $order->delete();
 
-        return redirect()->route('admin.sales')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('pembeli.purchase')->with(['success' => 'Data Berhasil Dihapus!']);
+    
     }
 }

@@ -33,9 +33,9 @@ class LoginController extends Controller
         if ($role === 'admin') {
             return '/admin/home';
         } elseif ($role === 'penjual') {
-            return '/penjual/home';
+            return '/penjual/sales';
         } elseif ($role === 'pembeli') {
-            return '/pembeli/home';
+            return '/pembeli/purchase';
             
         }
 

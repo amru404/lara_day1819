@@ -70,7 +70,7 @@ class HomeController extends Controller
 
     {
 
-        return view('pembeli.index');
+        return view('pembeli.product.index');
 
     }
 }

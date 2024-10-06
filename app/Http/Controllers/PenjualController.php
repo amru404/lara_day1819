@@ -6,19 +6,33 @@ use Illuminate\Http\Request;
 use App\Models\SalesOrder;
 use App\Models\Product;
 use Illuminate\Support\Str;
-    
+use Illuminate\Support\Facades\Auth;
 
-class SalesorderController extends Controller
+class PenjualController extends Controller
 {
-   
-    
+
+
+
+    // function dashboard(){
+    //     $order = PurchaseOrder::where('nama', Auth::user()->name)->get();
+    //     $order = count($order);
+    //     dd($order);
+    // }
+
+
+    function product(){
+        $products = Product::all();
+
+        return view('pembeli/product/index', compact('products'));
+
+    }
 
 
     public function index()
     {
-        $orders = SalesOrder::all();
+        $orders = SalesOrder::where('nama', Auth::user()->name)->get();
 
-        return view('admin.sales.index',compact('orders'));
+        return view('penjual.sales.index',compact('orders'));
     }
 
     
@@ -27,7 +41,7 @@ class SalesorderController extends Controller
     public function create()
     {
         $product = Product::all();
-        return view ('admin.sales.add',compact('product'));
+        return view ('penjual.sales.add',compact('product'));
     }
 
     /**
@@ -71,7 +85,7 @@ class SalesorderController extends Controller
             'total_harga'  => $total_harga,
         ]);
 
-        return redirect()->route('admin.sales')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('penjual.sales')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     
@@ -80,7 +94,7 @@ class SalesorderController extends Controller
     {
         $order = SalesOrder::findOrFail($id);
 
-        return view('admin.sales.detail', compact('order'));
+        return view('penjual.sales.detail', compact('order'));
     }
 
     
@@ -90,7 +104,7 @@ class SalesorderController extends Controller
         $order = SalesOrder::findOrFail($id);
         $product = Product::all();
 
-        return view('admin.sales.edit', compact('order','product'));
+        return view('penjual.sales.edit', compact('order','product'));
     }
 
     
@@ -136,7 +150,7 @@ class SalesorderController extends Controller
             'total_harga'  => $total_harga,
         ]);
 
-        return redirect()->route('admin.sales')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('penjual.sales')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -157,6 +171,6 @@ class SalesorderController extends Controller
         
         $order->delete();
 
-        return redirect()->route('admin.sales')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('penjual.sales')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

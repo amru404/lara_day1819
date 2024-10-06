@@ -5,7 +5,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PurchaseorderController;
-use App\Http\Controllers\salesorderController;
+use App\Http\Controllers\SalesorderController;
+use App\Http\Controllers\PembeliController;
+use App\Http\Controllers\PenjualController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,17 @@ Route::middleware(['auth', 'user-permission:penjual'])->group(function () {
   
 
     Route::get('penjual/home', [HomeController::class, 'penjualHome'])->name('penjual.home');
+
+    // sales order penjual
+    // Route::get('/pembeli/dashboard', [PembeliController::class, 'dashboard'])->name('pembeli.dashboard');
+    Route::get('/penjual/product', [PenjualController::class, 'product'])->name('penjual.product');
+    Route::get('/penjual/sales', [PenjualController::class, 'index'])->name('penjual.sales');
+    Route::get('/penjual/sales/add', [PenjualController::class, 'create'])->name('penjual.sales.add');
+    Route::POST('/penjual/sales/store', [PenjualController::class, 'store'])->name('penjual.sales.store');
+    Route::get('/penjual/sales/show/{id}', [PenjualController::class, 'show'])->name('penjual.sales.show');
+    Route::get('/penjual/sales/edit/{id}', [PenjualController::class, 'edit'])->name('penjual.sales.edit');
+    Route::PUT('/penjual/sales/update/{id}', [PenjualController::class, 'update'])->name('penjual.sales.update');
+    Route::get('/penjual/sales/destroy/{id}', [PenjualController::class, 'destroy'])->name('penjual.sales.destroy');
 
 });
 
@@ -117,7 +130,16 @@ Route::middleware(['auth', 'user-permission:pembeli'])->group(function () {
 
   
 
-    Route::get('/pembeli/home', [HomeController::class, 'pembeliHome'])->name('pembeli.home');
+      // purchase order pembeli
+      Route::get('/pembeli/dashboard', [PembeliController::class, 'dashboard'])->name('pembeli.dashboard');
+      Route::get('/pembeli/product', [PembeliController::class, 'product'])->name('pembeli.product');
+      Route::get('/pembeli/purchase', [PembeliController::class, 'index'])->name('pembeli.purchase');
+      Route::get('/pembeli/purchase/add', [PembeliController::class, 'create'])->name('pembeli.purchase.add');
+      Route::POST('/pembeli/purchase/store', [PembeliController::class, 'store'])->name('pembeli.purchase.store');
+      Route::get('/pembeli/purchase/show/{id}', [PembeliController::class, 'show'])->name('pembeli.purchase.show');
+      Route::get('/pembeli/purchase/edit/{id}', [PembeliController::class, 'edit'])->name('pembeli.purchase.edit');
+      Route::PUT('/pembeli/purchase/update/{id}', [PembeliController::class, 'update'])->name('pembeli.purchase.update');
+      Route::get('/pembeli/purchase/destroy/{id}', [PembeliController::class, 'destroy'])->name('pembeli.purchase.destroy');
 
 });
 

@@ -21,7 +21,7 @@ class PurchaseorderController extends Controller
 
 
     function indexPembeli(){
-        $order = PurchaseOrder::all();
+        $orders = PurchaseOrder::all();
 
         return view('pembeli.purchase.index',compact('orders'));
     }

@@ -6,7 +6,7 @@
 
 <h3>Table Data Order</h3>
 
-<a href="{{route('admin.purchase.add')}}" class="btn btn-primary">Add Product</a>
+<a href="{{route('pembeli.purchase.add')}}" class="btn btn-primary">Add Product</a>
 
 <div class="table-responsive">
   <table class="table table-striped jambo_table bulk_action"  id="datatable">
