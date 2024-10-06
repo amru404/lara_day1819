@@ -18,7 +18,7 @@ return new class extends Migration
             $table->longtext('alamat');
             $table->unsignedBigInteger('products_id');
             $table->integer('qty');
-            $table->float('total_harga')->nullable()->default(0);
+            $table->decimal('total_harga',15,2)->nullable()->default(0);
             $table->timestamps();
 
             $table->foreign('products_id')->references('id')->on('products')->onDelete('cascade');
